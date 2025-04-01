@@ -1,6 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
 
+// all the data should be only add in data field in backend otherwise duplicates Notifications recieved
+
 const firebaseConfig = {
   apiKey: "AIzaSyC9q3625-DFPqHRJEGv2C-oit1RWzLuGOw",
   authDomain: "my-first-pro-8fe9f.firebaseapp.com",
