@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { requestNotificationPermission } from "./firebase";
+import NotificationHandler from "./NotificationHandler";
 
 const NotificationComponent = () => {
   useEffect(() => {
@@ -8,7 +9,12 @@ const NotificationComponent = () => {
     }
   }, []);
 
-  return <div>Push Notifications Enabled</div>;
+  return (
+    <div>
+      Push Notifications Enabled
+      <NotificationHandler />
+    </div>
+  );
 };
 
 export default NotificationComponent;

@@ -32,7 +32,19 @@ export const requestNotificationPermission = async () => {
       vapidKey:
         "BAi_ZZpsXT_SMuMRplSwGQl4eXyQwyvBs5pGqQLv-nUdpZOwOoTECtpBaslA1eviunkAFKzaDCJKOQF81FtIKo8",
     });
-
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .register("/firebase-messaging-sw.js")
+        .then((registration) => {
+          console.log(
+            "Service Worker registered with scope:",
+            registration.scope
+          );
+        })
+        .catch((error) => {
+          console.error("Service Worker registration failed:", error);
+        });
+    }
     if (token) {
       console.log("FCM Token:", token);
       await sendTokenToServer(token); // Send token to backend
@@ -63,13 +75,4 @@ const sendTokenToServer = async (token) => {
   } catch (error) {
     console.error("Error sending token to server:", error);
   }
-};
-
-// Listen for Foreground Notifications
-export const onForegroundNotification = (callback) => {
-  if (!messaging) return;
-  onMessage(messaging, (payload) => {
-    console.log("Foreground Notification:", payload);
-    callback(payload);
-  });
 };
